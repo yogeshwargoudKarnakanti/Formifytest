@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inline Contact Form</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f8f8f8;
+      padding: 40px 10px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .inline-form {
+      background: white;
+      border: 1px solid #ddd;
+      padding: 30px;
+      border-radius: 8px;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    .inline-form h2 {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .inline-form .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .inline-form .form-row input,
+    .inline-form select {
+      flex: 1 1 48%;
+    }
+
+    .inline-form label {
+      margin-top: 15px;
+      display: block;
+      font-weight: bold;
+      color: #444;
+    }
+
+    .inline-form input,
+    .inline-form select,
+    .inline-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .inline-form textarea {
+      resize: vertical;
+    }
+
+    .inline-form button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .inline-form button:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <form 
+    class="inline-form" 
+    action="https://formspree.io/f/xwpbzzkv" 
+    method="POST"
+  >
+    <h2>Contact Us</h2>
+
+    <div class="form-row">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" name="name" id="name" required />
+      </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" required />
+      </div>
+    </div>
+
+    <label for="issue">Type of Issue</label>
+    <select name="issue" id="issue" required>
+      <option value="">Choose</option>
+      <option value="technical">Technical</option>
+      <option value="billing">Billing</option>
+      <option value="feedback">Feedback</option>
+      <option value="other">Other</option>
+    </select>
+
+    <label for="subject">Subject</label>
+    <input type="text" name="subject" id="subject" required />
+
+    <label for="message">Message</label>
+    <textarea name="message" id="message" rows="4" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+
+</body>
+</html>

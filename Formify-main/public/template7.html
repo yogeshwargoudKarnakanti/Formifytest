@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Step-by-Step Contact Form</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f1f1f1;
+      padding: 40px;
+    }
+
+    .form-container {
+      max-width: 400px;
+      background: white;
+      margin: auto;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+
+    .form-step {
+      display: none;
+      flex-direction: column;
+    }
+
+    .form-step.active {
+      display: flex;
+    }
+
+    label {
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .form-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .submit-btn {
+      width: 100%;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <form class="form-container" action="https://formspree.io/f/xwpbzzkv" method="POST">
+    <!-- Step 1 -->
+    <div class="form-step active" data-step="1">
+      <label for="name">👤 Your Name</label>
+      <input type="text" name="name" required>
+      <div class="form-buttons">
+        <div></div>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="form-step" data-step="2">
+      <label for="email">📧 Your Email</label>
+      <input type="email" name="email" required>
+      <div class="form-buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="form-step" data-step="3">
+      <label for="subject">📌 Subject</label>
+      <input type="text" name="subject" required>
+      <div class="form-buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+        <button type="button" onclick="nextStep()">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="form-step" data-step="4">
+      <label for="message">💬 Message</label>
+      <textarea name="message" required></textarea>
+      <div class="form-buttons">
+        <button type="button" onclick="prevStep()">Back</button>
+      </div>
+      <button class="submit-btn" type="submit">Send Message</button>
+    </div>
+  </form>
+
+  <script>
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.form-step');
+
+    function showStep(index) {
+      steps.forEach(step => step.classList.remove('active'));
+      steps[index].classList.add('active');
+    }
+
+    function nextStep() {
+      if (currentStep < steps.length - 1) {
+        currentStep++;
+        showStep(currentStep);
+      }
+    }
+
+    function prevStep() {
+      if (currentStep > 0) {
+        currentStep--;
+        showStep(currentStep);
+      }
+    }
+  </script>
+
+</body>
+</html>

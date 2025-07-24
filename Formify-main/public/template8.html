@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Slide-In Contact Form</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Open Button */
+    #open-form-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background-color: #007bff;
+      color: white;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    }
+
+    /* Slide-in Panel */
+    #contact-panel {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100%;
+      background-color: #f8f9fa;
+      box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+      transition: right 0.4s ease;
+      z-index: 999;
+      padding: 40px 20px;
+    }
+
+    #contact-panel.active {
+      right: 0;
+    }
+
+    #contact-panel h2 {
+      text-align: center;
+      margin-top: 0;
+      font-size: 26px;
+    }
+
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 6px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button[type="submit"] {
+      background-color: #28a745;
+      color: white;
+      padding: 12px;
+      margin-top: 20px;
+      width: 100%;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #218838;
+    }
+
+    /* Close Button */
+    #close-form {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 26px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Open Button -->
+  <button id="open-form-btn">Contact Us</button>
+
+  <!-- Slide-in Contact Form -->
+  <div id="contact-panel">
+    <button id="close-form">&times;</button>
+    <h2>Get in Touch</h2>
+    <form action="https://formspree.io/f/xwpbzzkv" method="POST">
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name" required />
+
+      <label for="email">Email</label>
+      <input type="email" name="email" id="email" required />
+
+      <label for="issue">Type of Issue</label>
+      <select name="issue" id="issue" required>
+        <option value="">Select issue</option>
+        <option value="technical">Technical</option>
+        <option value="billing">Billing</option>
+        <option value="general">General Inquiry</option>
+        <option value="other">Other</option>
+      </select>
+
+      <label for="subject">Subject</label>
+      <input type="text" name="subject" id="subject" required />
+
+      <label for="message">Message</label>
+      <textarea name="message" id="message" rows="5" required></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    const openBtn = document.getElementById('open-form-btn');
+    const closeBtn = document.getElementById('close-form');
+    const panel = document.getElementById('contact-panel');
+
+    openBtn.addEventListener('click', () => {
+      panel.classList.add('active');
+    });
+
+    closeBtn.addEventListener('click', () => {
+      panel.classList.remove('active');
+    });
+  </script>
+
+</body>
+</html>

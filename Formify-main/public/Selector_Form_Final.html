@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contact Form Template Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f4f4f4;
+    }
+
+    h2 {
+      margin-bottom: 10px;
+    }
+
+    select {
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 650px;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    #confirmSelection {
+      margin-top: 20px;
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #confirmSelection:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Select a Contact Form Template</h2>
+
+  <select id="formSelector">
+    <option value="template1.html">Template 1 - Classic</option>
+    <option value="template2.html">Template 2 - Modern Panel</option>
+    <option value="template3.html">Template 3 - Sidebar</option>
+    <option value="template4.html">Template 4 - Floating Popup</option>
+    <option value="template5.html">Template 5 - Minimalistic</option>
+    <option value="template6.html">Template 6 - Two Column</option>
+    <option value="template7.html">Template 7 - Tabbed Interface</option>
+    <option value="template8.html">Template 8 - Slide-in Panel</option>
+    <option value="template9.html">Template 9 - Collapsible Box</option>
+    <option value="template10.html">Template 10 - Dark Mode</option>
+  </select>
+
+  <!-- Template Preview -->
+  <iframe id="templatePreview" src="template1.html"></iframe>
+
+  <!-- Confirm Selection Button -->
+  <button id="confirmSelection">Use This Template</button>
+
+  <script>
+    const selector = document.getElementById('formSelector');
+    const previewFrame = document.getElementById('templatePreview');
+    const confirmBtn = document.getElementById('confirmSelection');
+
+    // Load saved template on page load
+    window.onload = () => {
+      const savedTemplate = localStorage.getItem('selectedTemplate') || 'template1.html';
+      selector.value = savedTemplate;
+      previewFrame.src = savedTemplate;
+    };
+
+    // Update preview and localStorage on template change
+    selector.addEventListener('change', () => {
+      const selected = selector.value;
+      localStorage.setItem('selectedTemplate', selected);
+      previewFrame.src = selected;
+    });
+
+    // Save selected template to your backend, which saves to Shopify metafield
+    confirmBtn.addEventListener('click', async () => {
+      const selected = selector.value;
+
+      try {
+        const response = await fetch('/api/save-template', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ template: selected }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert(`Template "${selected}" saved successfully to Shopify.`);
+        } else {
+          console.error(data.error);
+          alert("Failed to save template. Check console for details.");
+        }
+      } catch (err) {
+        console.error("Error:", err);
+        alert("Server error. Please try again.");
+      }
+    });
+  </script>
+
+</body>
+</html>
