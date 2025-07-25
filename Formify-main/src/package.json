@@ -1,7 +1,7 @@
 {
   "name": "Formify-main",
   "version": "1.0.0",
-  "main": "index.html",
+  "main": "Selector_Form_Final.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
